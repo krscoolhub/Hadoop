@@ -120,7 +120,7 @@ Overall, the Standby NameNode is an important component of the HDFS architecture
 
 
 
-# [11] YARN
+# [12] YARN
 YARN (Yet Another Resource Negotiator) is a resource management and scheduling system for distributed computing environments, such as Hadoop clusters. It is part of the Apache Hadoop project and provides a central platform for managing and coordinating the allocation of resources (such as CPU, memory, and storage) across the cluster.
 
 YARN consists of two main components: the ResourceManager and the NodeManager. The ResourceManager is the master component, and it is responsible for managing the allocation of resources across the cluster. It receives resource requests from applications and determines the best way to satisfy those requests by allocating resources on the worker nodes (DataNodes in the case of HDFS). The NodeManager is the slave component, and it is responsible for managing the resources on each individual worker node. It reports the available resources on the node to the ResourceManager, and it is responsible for launching and managing application containers on the node.
@@ -131,7 +131,7 @@ Overall, YARN is an important component of the Hadoop ecosystem that enables eff
 
 
 
-# [11] Steps for resource allocation in yarn
+# [13] Steps for resource allocation in yarn
 The steps for resource allocation in YARN (Yet Another Resource Negotiator) typically involve the following:
 
 A client application submits a request for resources to the ResourceManager (the master component in a YARN cluster). This request specifies the amount and type of resources that the application needs, such as CPU, memory, and storage.
@@ -149,7 +149,7 @@ Overall, these steps illustrate the basic process by which YARN coordinates the 
 
 
 
-# [12] Resource Manager
+# [14] Resource Manager
 The ResourceManager is a key component of YARN (Yet Another Resource Negotiator), which is a resource management and scheduling system for distributed computing environments, such as Hadoop clusters. It is the master component in a YARN cluster, and it is responsible for managing the allocation of resources (such as CPU, memory, and storage) across the cluster.
 
 The ResourceManager receives resource requests from applications and determines the best way to satisfy those requests by allocating resources on the worker nodes (DataNodes in the case of HDFS). It uses a variety of factors to make allocation decisions, such as the available resources on each node, the capacity of the cluster, and the current workload. It then communicates the allocation decisions to the NodeManagers (the slave components) on the worker nodes, instructing them to allocate the requested resources to the applications.
@@ -160,7 +160,7 @@ Overall, the ResourceManager is a critical component of YARN that enables effici
 
 
 
- # [13] Scheduler
+ # [15] Scheduler
 A scheduler is a system or component that is responsible for determining the order and timing of execution for a set of tasks or jobs. Schedulers are commonly used in computing environments to manage the allocation of resources, such as CPU and memory, and to ensure that tasks are executed efficiently and in a timely manner.
 
 There are many different types of schedulers, and the specific characteristics and behaviors of a scheduler can vary depending on the context and the needs of the system. For example, some schedulers may prioritize tasks based on certain criteria, such as deadlines or priorities, while others may use more complex algorithms to optimize resource utilization and performance.
@@ -173,7 +173,7 @@ Overall, schedulers are important components of many computing systems, as they 
 
 
 
-# [14] Application Master
+# [16] Application Master
 In the context of YARN (Yet Another Resource Negotiator), the Application Master is a per-application component that is responsible for negotiating resources from the ResourceManager and working with the NodeManager to execute and monitor the tasks of the application.
 
 When an application is submitted to a YARN cluster, the ResourceManager first creates an instance of the ApplicationMaster for that application. The ApplicationMaster then contacts the ResourceManager to request the resources that it needs to execute its tasks, such as CPU, memory, and storage. The ResourceManager uses its scheduler to determine the best way to satisfy the resource request, and it communicates the allocation decision to the NodeManager on the appropriate worker node.
@@ -186,7 +186,7 @@ Overall, the ApplicationMaster is an important component of YARN that enables ap
 
 
 
-# [15] Node Manager
+# [17] Node Manager
 The NodeManager is a key component of YARN (Yet Another Resource Negotiator), which is a resource management and scheduling system for distributed computing environments, such as Hadoop clusters. It is the slave component in a YARN cluster, and it is responsible for managing the resources on each individual worker node.
 
 The NodeManager is responsible for reporting the available resources on the node to the ResourceManager (the master component), and it is also responsible for launching and managing application containers on the node. When the ResourceManager receives a resource request from an application, it communicates the allocation decision to the appropriate NodeManager, instructing it to allocate the requested resources to the application.
@@ -194,3 +194,39 @@ The NodeManager is responsible for reporting the available resources on the node
 The NodeManager then creates a container to hold the application and its allocated resources, and it launches the application within the container. It monitors the application's use of the allocated resources and reports this information back to the ResourceManager. The ResourceManager uses this information to manage the overall allocation of resources across the cluster and to ensure that the resources are used efficiently.
 
 Overall, the NodeManager is a critical component of YARN that enables the efficient and effective execution of applications on the worker nodes of a distributed computing environment.
+
+
+
+# [18] Data node
+In the context of HDFS (Hadoop Distributed File System), a DataNode is a worker node that is responsible for storing the actual data blocks of a file and serving read and write requests from the clients.
+
+A typical HDFS cluster consists of a single NameNode (the master node) and multiple DataNodes. The NameNode is responsible for managing the file system namespace and regulating access to files by client applications. When a client application wants to read or write a file, it first contacts the NameNode to get information about the location of the data blocks. The NameNode then sends instructions to the appropriate DataNodes, which perform the actual read or write operations.
+
+The data is typically replicated across multiple DataNodes for fault tolerance, and the NameNode keeps track of which blocks are stored on which DataNodes. The DataNodes also communicate with the NameNode periodically to report on the status of their blocks and to receive instructions on any necessary replication or rebalancing of the data.
+
+Overall, the DataNodes are an essential component of HDFS, as they provide the storage and processing power for the file system.
+
+
+
+
+
+# [19] Name node
+In the context of HDFS (Hadoop Distributed File System), the NameNode is the master node that is responsible for managing the file system namespace and regulating access to files by client applications.
+
+A typical HDFS cluster consists of a single NameNode and multiple DataNodes (worker nodes). The NameNode maintains the file system namespace and the file-to-block mapping, which describes how the files are stored as blocks across the DataNodes. It also maintains the edit logs, which are a log of all changes that have been made to the file system since the last checkpoint.
+
+When a client application wants to read or write a file, it first contacts the NameNode to get information about the location of the data blocks. The NameNode then sends instructions to the appropriate DataNodes, which perform the actual read or write operations. The NameNode also monitors the health and status of the DataNodes, and it coordinates the replication and rebalancing of data blocks as needed.
+
+Overall, the NameNode is a critical component of HDFS, as it provides the centralized control and management for the file system.
+
+
+
+
+# [20] block
+In the context of HDFS (Hadoop Distributed File System), a block is the basic unit of storage for data in the file system.
+
+In HDFS, files are split into blocks and distributed across multiple DataNodes (worker nodes) in a cluster. Each block is typically 64 MB or 128 MB in size, and multiple blocks make up a file. The blocks are replicated across multiple DataNodes for fault tolerance, and the NameNode (the master node) keeps track of which blocks are stored on which DataNodes.
+
+When a client application wants to read or write a file, it first contacts the NameNode to get information about the location of the data blocks. The NameNode then sends instructions to the appropriate DataNodes, which perform the actual read or write operations on the blocks.
+
+Overall, the concept of blocks is an important aspect of the HDFS architecture, as it enables the efficient and scalable storage of large files across a distributed cluster of machines.
