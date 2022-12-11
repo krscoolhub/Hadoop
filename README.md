@@ -70,3 +70,24 @@ The Secondary NameNode is a support role for the primary NameNode (the master no
 The Standby NameNode, on the other hand, is a true hot standby for the primary NameNode. It maintains an in-memory, up-to-date copy of the file system metadata, and can take over as the active NameNode if the primary NameNode fails. This allows for transparent and automatic failover, with no interruption to the system.
 
 Overall, the Secondary NameNode and the Standby NameNode serve different purposes, but both can be useful in ensuring the availability and reliability of an HDFS cluster.
+
+
+
+# [8] FS image
+In the context of HDFS, the term "FS image" refers to a file that contains the complete state of the file system at a given point in time. This includes the file system metadata, such as the directory structure and the file-to-block mapping, as well as the actual contents of the file system's blocks.
+
+The FS image is created and maintained by the NameNode (the master node in an HDFS cluster), and it is used to restore the file system to a known state after a failure or other disruption. When the NameNode starts up, it loads the FS image from disk into memory, and this becomes the basis for the file system's in-memory state. The NameNode then applies any changes that have occurred since the FS image was last saved, such as new files being created or deleted, to update the in-memory state of the file system.
+
+Overall, the FS image is an important component of HDFS that allows the file system to recover from failures and maintain a consistent and up-to-date state.
+
+
+
+
+# [9] Edit logs
+In the context of HDFS, the term "edit logs" refers to a log of all changes that have been made to the file system since the last checkpoint. This includes information about file and directory creations, deletions, and modifications, as well as changes to the file-to-block mapping and other metadata.
+
+The edit logs are maintained by the NameNode (the master node in an HDFS cluster), and they are used to update the in-memory state of the file system after a failure or other disruption. When the NameNode starts up, it first loads the FS image (a file containing the complete state of the file system at a given point in time) into memory. It then applies the changes recorded in the edit logs to the in-memory state of the file system, bringing it up-to-date.
+
+The edit logs are also used by the Secondary NameNode, which periodically downloads the edit logs from the primary NameNode and uses them to create a new FS image. This helps to reduce the load on the primary NameNode and improve its performance.
+
+Overall, the edit logs are an important component of HDFS that help to ensure the consistency and reliability of the file system.
