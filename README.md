@@ -91,3 +91,106 @@ The edit logs are maintained by the NameNode (the master node in an HDFS cluster
 The edit logs are also used by the Secondary NameNode, which periodically downloads the edit logs from the primary NameNode and uses them to create a new FS image. This helps to reduce the load on the primary NameNode and improve its performance.
 
 Overall, the edit logs are an important component of HDFS that help to ensure the consistency and reliability of the file system.
+
+
+
+# [10] HDFS Architecture
+HDFS (Hadoop Distributed File System) is a distributed, scalable, and fault-tolerant file system designed to store data on low-cost commodity hardware. It is part of the Apache Hadoop project and provides a reliable and distributed way of storing data across a cluster of machines.
+
+The HDFS architecture is based on a master-slave model, where a cluster consists of a single NameNode (the master node) and multiple DataNodes (the worker nodes). The NameNode is responsible for managing the file system namespace and regulating access to files by client applications. The DataNodes are responsible for storing the actual data blocks and serving read and write requests from the clients.
+
+When a client application wants to read or write a file, it first contacts the NameNode to get information about the location of the data blocks. The NameNode then sends instructions to the appropriate DataNodes, which perform the actual read or write operations. The data is typically replicated across multiple DataNodes for fault tolerance, and the NameNode keeps track of which blocks are stored on which DataNodes.
+
+Overall, the HDFS architecture is designed to be scalable, flexible, and fault-tolerant, allowing it to store and manage large amounts of data across a cluster of machines.
+
+
+
+
+
+# [11] Standby Name node Architecture
+The Standby NameNode is a hot standby for the primary NameNode (the master node in an HDFS cluster). It maintains an in-memory, up-to-date copy of the file system metadata, and can take over as the active NameNode if the primary NameNode fails. This allows for transparent and automatic failover, with no interruption to the system.
+
+The Standby NameNode is typically deployed as a separate machine or set of machines, and it maintains a constant connection to the primary NameNode. The primary NameNode sends periodic updates to the Standby NameNode, which keeps its in-memory copy of the file system metadata in sync with the primary NameNode. If the primary NameNode fails, the Standby NameNode can take over immediately and continue servicing client requests without any interruption.
+
+The Standby NameNode also acts as a Secondary NameNode, periodically downloading the primary NameNode's edit logs and building new FS images (files containing the complete state of the file system at a given point in time). This helps to reduce the load on the primary NameNode and improve its performance.
+
+Overall, the Standby NameNode is an important component of the HDFS architecture that helps to ensure the availability and reliability of the file system.
+
+
+
+
+
+# [11] YARN
+YARN (Yet Another Resource Negotiator) is a resource management and scheduling system for distributed computing environments, such as Hadoop clusters. It is part of the Apache Hadoop project and provides a central platform for managing and coordinating the allocation of resources (such as CPU, memory, and storage) across the cluster.
+
+YARN consists of two main components: the ResourceManager and the NodeManager. The ResourceManager is the master component, and it is responsible for managing the allocation of resources across the cluster. It receives resource requests from applications and determines the best way to satisfy those requests by allocating resources on the worker nodes (DataNodes in the case of HDFS). The NodeManager is the slave component, and it is responsible for managing the resources on each individual worker node. It reports the available resources on the node to the ResourceManager, and it is responsible for launching and managing application containers on the node.
+
+Overall, YARN is an important component of the Hadoop ecosystem that enables efficient and flexible resource management and scheduling in distributed computing environments.
+
+
+
+
+
+# [11] Steps for resource allocation in yarn
+The steps for resource allocation in YARN (Yet Another Resource Negotiator) typically involve the following:
+
+A client application submits a request for resources to the ResourceManager (the master component in a YARN cluster). This request specifies the amount and type of resources that the application needs, such as CPU, memory, and storage.
+
+The ResourceManager receives the resource request and determines the best way to satisfy it by allocating resources on the worker nodes (typically DataNodes in the case of HDFS). This allocation is based on a variety of factors, such as the available resources on each node, the capacity of the cluster, and the current workload.
+
+The ResourceManager communicates the allocation decision to the NodeManager (the slave component) on the appropriate worker node, instructing it to allocate the requested resources to the application.
+
+The NodeManager on the worker node receives the allocation instruction and creates a container to hold the application and its allocated resources. The container is then launched, and the application is executed within it.
+
+The NodeManager monitors the application's use of the allocated resources and reports this information back to the ResourceManager. The ResourceManager uses this information to manage the overall allocation of resources across the cluster and to ensure that the resources are used efficiently.
+
+Overall, these steps illustrate the basic process by which YARN coordinates the allocation of resources to applications in a distributed computing environment.
+
+
+
+
+# [12] Resource Manager
+The ResourceManager is a key component of YARN (Yet Another Resource Negotiator), which is a resource management and scheduling system for distributed computing environments, such as Hadoop clusters. It is the master component in a YARN cluster, and it is responsible for managing the allocation of resources (such as CPU, memory, and storage) across the cluster.
+
+The ResourceManager receives resource requests from applications and determines the best way to satisfy those requests by allocating resources on the worker nodes (DataNodes in the case of HDFS). It uses a variety of factors to make allocation decisions, such as the available resources on each node, the capacity of the cluster, and the current workload. It then communicates the allocation decisions to the NodeManagers (the slave components) on the worker nodes, instructing them to allocate the requested resources to the applications.
+
+The ResourceManager also receives periodic updates from the NodeManagers about the usage of allocated resources, and it uses this information to manage the overall allocation of resources across the cluster. This helps to ensure that the resources are used efficiently and that applications receive the resources they need to run effectively.
+
+Overall, the ResourceManager is a critical component of YARN that enables efficient and flexible resource management and scheduling in distributed computing environments.
+
+
+
+ # [13] Scheduler
+A scheduler is a system or component that is responsible for determining the order and timing of execution for a set of tasks or jobs. Schedulers are commonly used in computing environments to manage the allocation of resources, such as CPU and memory, and to ensure that tasks are executed efficiently and in a timely manner.
+
+There are many different types of schedulers, and the specific characteristics and behaviors of a scheduler can vary depending on the context and the needs of the system. For example, some schedulers may prioritize tasks based on certain criteria, such as deadlines or priorities, while others may use more complex algorithms to optimize resource utilization and performance.
+
+In the context of YARN (Yet Another Resource Negotiator), the ResourceManager includes a scheduler that is responsible for determining the allocation of resources to applications. The ResourceManager receives resource requests from applications, and the scheduler uses various factors, such as the available resources on each node and the current workload, to determine the best way to satisfy those requests. It then communicates the allocation decisions to the NodeManagers (the slave components) on the worker nodes, instructing them to allocate the requested resources to the applications.
+
+Overall, schedulers are important components of many computing systems, as they enable the efficient and effective execution of tasks and the allocation of resources.
+
+
+
+
+
+# [14] Application Master
+In the context of YARN (Yet Another Resource Negotiator), the Application Master is a per-application component that is responsible for negotiating resources from the ResourceManager and working with the NodeManager to execute and monitor the tasks of the application.
+
+When an application is submitted to a YARN cluster, the ResourceManager first creates an instance of the ApplicationMaster for that application. The ApplicationMaster then contacts the ResourceManager to request the resources that it needs to execute its tasks, such as CPU, memory, and storage. The ResourceManager uses its scheduler to determine the best way to satisfy the resource request, and it communicates the allocation decision to the NodeManager on the appropriate worker node.
+
+The NodeManager then creates a container to hold the application and its allocated resources, and it launches the application within the container. The ApplicationMaster is responsible for managing the execution of the application's tasks within the container, and it communicates with the NodeManager to request and release resources as needed. It also monitors the progress of the tasks and provides status updates to the ResourceManager.
+
+Overall, the ApplicationMaster is an important component of YARN that enables applications to request and use resources from the cluster in a dynamic and flexible manner.
+
+
+
+
+
+# [15] Node Manager
+The NodeManager is a key component of YARN (Yet Another Resource Negotiator), which is a resource management and scheduling system for distributed computing environments, such as Hadoop clusters. It is the slave component in a YARN cluster, and it is responsible for managing the resources on each individual worker node.
+
+The NodeManager is responsible for reporting the available resources on the node to the ResourceManager (the master component), and it is also responsible for launching and managing application containers on the node. When the ResourceManager receives a resource request from an application, it communicates the allocation decision to the appropriate NodeManager, instructing it to allocate the requested resources to the application.
+
+The NodeManager then creates a container to hold the application and its allocated resources, and it launches the application within the container. It monitors the application's use of the allocated resources and reports this information back to the ResourceManager. The ResourceManager uses this information to manage the overall allocation of resources across the cluster and to ensure that the resources are used efficiently.
+
+Overall, the NodeManager is a critical component of YARN that enables the efficient and effective execution of applications on the worker nodes of a distributed computing environment.
