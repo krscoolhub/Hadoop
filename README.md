@@ -269,3 +269,30 @@ The input format is the way in which input data is structured and presented to a
 
 # [25] Input splits
 Input splits are the smaller sub-datasets that are derived from the larger input dataset in the MapReduce framework. The input data is divided into blocks, and the MapReduce framework uses the input format to determine how the blocks are split into input splits. The input splits are then distributed across the cluster for parallel processing by the Map function. The size of the input splits can be configured by the user or application, depending on the specific requirements and characteristics of the input data. The size of the input splits can affect the performance of the MapReduce job, as smaller input splits may lead to more overhead in terms of communication and coordination, while larger input splits may lead to uneven data distribution and inefficient processing.
+
+
+# [26] Record reader in map reduce
+In the context of MapReduce, a record reader is a component that is responsible for parsing input data and converting it into a form that can be processed by the MapReduce system. This typically involves splitting the input data into individual records and converting each record into a key-value pair, which is the basic unit of data used by MapReduce. The record reader may also perform other tasks, such as filtering out irrelevant data or performing basic data transformations. The output of the record reader is passed to the Map function for further processing.
+
+
+
+
+
+# [27] Mapper
+In the context of MapReduce, a mapper is a function that processes input data and produces a set of intermediate key-value pairs. The input data is typically in the form of key-value pairs produced by the record reader. The mapper applies a user-defined function to each input pair to produce a set of intermediate pairs, which are then passed to the shuffle and sort phase of MapReduce. The purpose of the mapper is to transform the input data into a form that can be processed and aggregated by the Reduce function.
+
+
+
+
+
+# [28] Combiner
+In the context of MapReduce, a combiner is a function that performs a local reduction on the output of the mapper. The purpose of the combiner is to reduce the amount of data that needs to be sent over the network to the reducer, which can improve the performance of the MapReduce job. The combiner function is optional and is typically used when the reduction function is associative and commutative, which means that the order in which the reduction is performed does not affect the result.
+
+
+
+
+
+# [29] Partitioner
+In the context of MapReduce, a partitioner is a function that determines how the intermediate key-value pairs produced by the mapper are distributed among the reducer tasks. The partitioner takes as input a key and a number of partitions and returns the partition that the key-value pair should be sent to. The purpose of the partitioner is to ensure that the reducer tasks receive a balanced and distributed set of key-value pairs to process. This can improve the performance and scalability of the MapReduce job. The default partitioner in MapReduce uses a hash function to determine which partition a key should be sent to.
+
+
