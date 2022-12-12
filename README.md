@@ -296,3 +296,33 @@ In the context of MapReduce, a combiner is a function that performs a local redu
 In the context of MapReduce, a partitioner is a function that determines how the intermediate key-value pairs produced by the mapper are distributed among the reducer tasks. The partitioner takes as input a key and a number of partitions and returns the partition that the key-value pair should be sent to. The purpose of the partitioner is to ensure that the reducer tasks receive a balanced and distributed set of key-value pairs to process. This can improve the performance and scalability of the MapReduce job. The default partitioner in MapReduce uses a hash function to determine which partition a key should be sent to.
 
 
+
+
+# [29] Shuffling & Sorting
+In the context of MapReduce, shuffling and sorting refers to the process of organizing and distributing the intermediate key-value pairs produced by the mapper among the reducer tasks. This process typically involves three steps:
+
+The partitioner is used to determine which reducer each key-value pair should be sent to.
+The intermediate pairs are then shuffled and grouped by key on each mapper node.
+The groups of pairs are sorted by key on each mapper node, so that all pairs with the same key are in the same order.
+The purpose of shuffling and sorting is to prepare the data for the Reduce phase, where the key-value pairs are aggregated and transformed into the final output of the MapReduce job. Shuffling and sorting can also help to improve the performance and scalability of the MapReduce job by distributing the data evenly among the reducer tasks and ensuring that the pairs are properly ordered.
+
+
+
+
+
+# [30] Reducer
+In the context of MapReduce, a reducer is a function that processes a set of intermediate key-value pairs and produces a set of output key-value pairs. The input to the reducer is typically the output of the shuffle and sort phase, which is a collection of key-value pairs that have been grouped and ordered by key. The reducer applies a user-defined function to each group of pairs to produce a set of output pairs, which are then written to the output of the MapReduce job. The purpose of the reducer is to perform the final aggregation and transformation of the data, and to produce the desired output of the MapReduce job.
+
+
+
+
+
+# [31] Output Format
+In the context of MapReduce, the output format is the way in which the output of the reducer is written to the final output of the MapReduce job. This typically involves specifying the key-value pair delimiters, the file format of the output data, and any other necessary configuration options. The output format can be customized by the user to meet the specific needs of the MapReduce job. For example, the output format can be set to write the output data to a file in a specific format, such as CSV or JSON, or to a database table. The output format is typically specified as part of the MapReduce job configuration.
+
+
+
+
+
+# [32] Output Files
+In the context of MapReduce, the output files are the files that contain the final output of the MapReduce job. These files are typically stored in a distributed file system, such as HDFS, and can be accessed by the user or other applications for further processing or analysis. The output files are typically written by the reducer, using the output format specified in the MapReduce job configuration. The number and location of the output files depend on the configuration of the MapReduce job, and can vary depending on the size and complexity of the input data and the requirements of the output format.
