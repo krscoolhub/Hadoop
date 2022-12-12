@@ -250,3 +250,22 @@ The intermediate key-value pairs are grouped by key and passed to the Reduce fun
 The final output is written to a distributed file system or returned to the application.
 
 The MapReduce framework manages the parallelization, partitioning, and distribution of the data across the cluster, as well as the coordination and execution of the tasks.
+
+
+
+
+# [23] Input files
+Input files are the data that is processed by a program or application. In the context of the MapReduce framework, input files are the data that is fed into the Map function for processing. The input files can be of any format, such as text files, binary files, or sequence files. The Map function processes the input files and generates intermediate key-value pairs, which are then passed to the Reduce function for further processing. The input files are typically stored in a distributed file system, such as HDFS in Hadoop, and are divided into blocks that are distributed across the cluster for parallel processing.
+
+
+
+
+
+ # [24] Input format
+The input format is the way in which input data is structured and presented to a program or application. In the context of the MapReduce framework, the input format specifies how the input data is read and divided into blocks for processing by the Map function. There are different types of input formats, such as TextInputFormat, SequenceFileInputFormat, and KeyValueTextInputFormat, which are designed to handle different types of input data. The input format can be set by the user or application, depending on the specific requirements and characteristics of the input data.
+
+
+
+
+# [25] Input splits
+Input splits are the smaller sub-datasets that are derived from the larger input dataset in the MapReduce framework. The input data is divided into blocks, and the MapReduce framework uses the input format to determine how the blocks are split into input splits. The input splits are then distributed across the cluster for parallel processing by the Map function. The size of the input splits can be configured by the user or application, depending on the specific requirements and characteristics of the input data. The size of the input splits can affect the performance of the MapReduce job, as smaller input splits may lead to more overhead in terms of communication and coordination, while larger input splits may lead to uneven data distribution and inefficient processing.
