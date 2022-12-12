@@ -230,3 +230,23 @@ In HDFS, files are split into blocks and distributed across multiple DataNodes (
 When a client application wants to read or write a file, it first contacts the NameNode to get information about the location of the data blocks. The NameNode then sends instructions to the appropriate DataNodes, which perform the actual read or write operations on the blocks.
 
 Overall, the concept of blocks is an important aspect of the HDFS architecture, as it enables the efficient and scalable storage of large files across a distributed cluster of machines.
+
+
+
+# [21] Map reduce architecture in hadoop
+Hadoop is an open-source software framework for distributed storage and processing of large datasets on clusters of commodity hardware. It uses the MapReduce programming model for parallel and distributed processing of large datasets on clusters of computers. In Hadoop, the MapReduce framework consists of two main components: the Map function and the Reduce function. The Map function processes a dataset in parallel, dividing it into smaller sub-datasets, which are then passed to the Reduce function to produce a final output. The MapReduce framework in Hadoop automatically manages the parallelization, partitioning, and distribution of the data across the cluster, as well as the coordination of the tasks and their execution.
+
+
+
+
+
+# [22] Step by step excution flow of Map Reduce
+The input data is divided into small splits called blocks, which are then distributed across the cluster for processing.
+
+The Map function is applied to each block of data in parallel, generating a set of intermediate key-value pairs.
+
+The intermediate key-value pairs are grouped by key and passed to the Reduce function, which aggregates the values and produces a final output.
+
+The final output is written to a distributed file system or returned to the application.
+
+The MapReduce framework manages the parallelization, partitioning, and distribution of the data across the cluster, as well as the coordination and execution of the tasks.
